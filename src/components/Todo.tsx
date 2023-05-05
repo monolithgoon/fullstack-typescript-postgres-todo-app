@@ -27,6 +27,7 @@ export function Todo({ todo }: {todo: TodoItemType}) {
 							...todo,
 							done
 						})
+						
 					}
 					return todo
 				})

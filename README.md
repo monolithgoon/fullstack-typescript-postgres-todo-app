@@ -1,28 +1,42 @@
 # Create T3 App
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+Fullstack Todo app with user authentication, bootstrapped with the [T3 Stack](https://create.t3.gg/) template using `create-t3-app`. 
 
-## What's next? How do I make an app with this?
+The app ships with the following: tRPC - TypeScript Remote Procedure Call (for end-to-end API type safety), Tailwind CSS for styling, Next.js, Prisma (Node.js & Typescript ORM), and Superbase (PostgreSQL database cloud host).
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+- Fullstack:
+  - [t3.gg](https://createt3.gg): opinionated Next.js starter kit with NextAuth, Prisma, tRPC, Tailwind CSS & TypeScript
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+- Frontend:
+  - [Next.js](https://github.com/vercel/next.js) - a React framework for production.
+  - [Tailwind](https://tailwindcss.com/) for styling and layout.
+  - [Supabase.js](https://supabase.com/docs/library/getting-started) cloud-hosted Postgres databse for user management and realtime data syncing.
+- Backend:
+  - [NextAuth.js](https://next-auth.js.org): User authentication for Next.js
+  - [trpc.io](https://trpc.io): write end-to-end typesafe APIs without any code generation or runtime bloat
+  - [app.supabase.com](https://app.supabase.com/): hosted Postgres database with restful API for usage with Supabase.js.
+  - [Prisma.io](https://prisma.io): PostgreSQL database ORM for Node.js & TypeScript
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+## Deploy with Vercel
 
-## Learn More
+The Vercel deployment will guide you through creating a Supabase account and project. After installation of the Supabase integration, all relevant environment variables will be set up so that the project is usable immediately after deployment 🚀
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Fsupabase%2Fexamples%2Ftree%2Fmain%2Fsupabase-js-v1%2Ftodo-list%2Fnextjs-todo-list&project-name=supabase-todo-list&repository-name=supabase-todo-list&demo-title=Todo%20list&demo-description=An%20example%20web%20app%20using%20Supabase%20and%20Next.js&demo-url=https%3A%2F%2Fsupabase-nextjs-todo-list.vercel.app&demo-image=https%3A%2F%2Fi.imgur.com%2FGJauPlN.png&integration-ids=oac_jUduyjQgOyzev1fjrW83NYOv&external-id=supabase-todo-list)
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+## Build from scratch
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+### 1. Create new project
 
-## How do I deploy this?
+Sign up to Supabase - [https://app.supabase.com](https://app.supabase.com) and create a new project. Wait for your database to start.
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+### 2. Clone the GitHub repo
+
+Once your database has started, run the "Todo List" quickstart. Inside of your project, enter the `SQL editor` tab and scroll down until you see `TODO LIST: Build a basic todo list with Row Level Security`.
+
+### 3. Get the URL and Key
+
+Go to the Project Settings (the cog icon), open the API tab, and find your API URL and `anon` key, you'll need these in the next step.
+
+## Authors
+
+- Nduka Okpue

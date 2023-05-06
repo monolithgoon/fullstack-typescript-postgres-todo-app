@@ -16,7 +16,7 @@ function Home() {
         <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 bg-white">
           {sessionData && (
             <div className="grid grid-cols-1 gap-4 md:gap-8">
-              <div className="flex flex-col gap-4 p-8" style={{border: "2px solid black", backgroundColor: "white"}}>
+              <div className="flex flex-col gap-4 p-8" style={{border: "1px solid black", backgroundColor: "white"}}>
                 <h3 className="text-xl font-bold">TODOS</h3>
                 <Todos />
                 <CreateTodo />
@@ -25,7 +25,7 @@ function Home() {
           )}
           <div
             className="flex flex-col items-center gap-2"
-            style={{ backgroundColor: "whitesmoke", padding: "5rem", border: "2px solid black" }}
+            style={{ backgroundColor: "whitesmoke", padding: "5rem", border: "1px solid black" }}
           >
             <div className="flex flex-col items-center justify-center gap-4">
               <p className="text-l text-center">

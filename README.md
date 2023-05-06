@@ -103,6 +103,11 @@ Open the GitHub [Developer Settings](https://github.com/settings/developers)
 
 - For your local build, update the `GITHUB_CLIENT_ID` & `GITHUB_CLIENT_SECRET` variables in the `.env` file
 
+```bash
+  GITHUB_CLIENT_ID=your_client_id
+  GITHUB_CLIENT_SECRET=your_client_secret
+```
+
 ### 5. Setup OAuth 2.0 with Google
 
 To set up a Google provider for NextAuth.js, you will need to follow these steps:
@@ -111,11 +116,11 @@ To set up a Google provider for NextAuth.js, you will need to follow these steps
 
 - [Follow the steps outlined here](https://support.google.com/cloud/answer/6158849?hl=en#zippy=%2Cstep-create-a-new-client-secret%2Cauthorized-domains)
 
-- Copy the "Client ID" and "Client Secret" values from the Google Cloud Console and paste them into your Next.js app's .env file. For example: 
+- Copy the `Client ID` and `Client Secret` values from the Google Cloud Console and paste them into your Next.js app's `.env` file. For example: 
 
 ```bash
-GOOGLE_CLIENT_ID=your_client_id
-GOOGLE_CLIENT_SECRET=your_client_secret
+  GOOGLE_CLIENT_ID=your_client_id
+  GOOGLE_CLIENT_SECRET=your_client_secret
 ```
 
 ### 6. Start the project

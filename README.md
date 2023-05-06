@@ -1,10 +1,11 @@
-# Create T3 App
+# Fullstack Typescript, PostgreSQL Todo App
 
-Fullstack Todo app with user authentication, bootstrapped with the [T3 Stack](https://create.t3.gg/) template using `create-t3-app`. 
+Fullstack Todo app with user authentication, bootstrapped with the [T3 Stack](https://create.t3.gg/) template using `create-t3-app`.
 
 The app ships with the following: tRPC - TypeScript Remote Procedure Call (for end-to-end API type safety), Tailwind CSS for styling, Next.js, Prisma (Node.js & Typescript ORM), and Superbase (PostgreSQL database cloud host).
 
 - Fullstack:
+
   - [t3.gg](https://createt3.gg): opinionated Next.js starter kit with NextAuth, Prisma, tRPC, Tailwind CSS & TypeScript
 
 - Frontend:
@@ -25,17 +26,19 @@ The Vercel deployment will guide you through creating a Supabase account and pro
 
 ## Build from scratch
 
-### 1. Create new project
+### 1. Clone the GitHub repo and run `npx create t3-app@latest
+
+### 2. Initialize the PostgreSQL database on Supabase
+
+- A. Create new Supabase project
 
 Sign up to Supabase - [https://app.supabase.com](https://app.supabase.com) and create a new project. Wait for your database to start.
 
-### 2. Clone the GitHub repo
+- B. Get the URL and Key
 
-Once your database has started, run the "Todo List" quickstart. Inside of your project, enter the `SQL editor` tab and scroll down until you see `TODO LIST: Build a basic todo list with Row Level Security`.
+Once the database has started, go to the Supabase Project Settings (the cog icon), open the API tab, and find your databse URL. Copy the database URI, and update the `DATABASE_URL` environment variables
 
-### 3. Get the URL and Key
-
-Go to the Project Settings (the cog icon), open the API tab, and find your API URL and `anon` key, you'll need these in the next step.
+- C. Run `prisma db push` to sync the local schema with the cloud Postgres database
 
 ## Authors
 

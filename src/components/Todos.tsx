@@ -2,6 +2,7 @@ import { api } from "../utils/api";
 import { Todo } from "./Todo";
 
 export function Todos() {
+  
   const { data: todos, isLoading, isError } = api.todos.getAllTodos.useQuery();
 
   if (isLoading) return <div>Loading todos 🔄</div>;

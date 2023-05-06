@@ -5,8 +5,11 @@ import {
   type DefaultSession,
 } from "next-auth";
 import EmailProvider from "next-auth/providers/email";
+import GithubProvider from "next-auth/providers/github";
+import CredentialProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { prisma } from "./db";
+import { env } from "@/env.mjs";
 
 /**
  * Module augmentation for `next-auth` types
@@ -35,6 +38,7 @@ declare module "next-auth" {
  * @see https://next-auth.js.org/configuration/options
  **/
 export const authOptions: NextAuthOptions = {
+
   callbacks: {
     session({ session, user }) {
       if (session.user) {
@@ -44,20 +48,22 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
   },
+
   adapter: PrismaAdapter(prisma),
+
   providers: [
     EmailProvider({
       server: {
-        host: process.env.EMAIL_SERVER || "http://127.0.0.1:3000",
-        port: process.env.EMAIL_SERVER_PORT,
+        host: env.EMAIL_SERVER_HOST || "http://127.0.0.1:3000",
+        port: env.EMAIL_SERVER_PORT,
         auth: {
-          user: "apikey",
-          pass: process.env.EMAIL_API_KEY,
+          user: env.EMAIL_SERVER_USER,
+          pass: env.EMAIL_SERVER_PASSWORD,
         },
       },
-      from: process.env.EMAIL_FROM || "test@localhost.com",
+      from: env.EMAIL_FROM || "no-reply@example.com",
 
-      ...(process.env.NODE_ENV !== "production"
+      ...(env.NODE_ENV !== "production"
         ? {
             sendVerificationRequest({ url }) {
               console.log("LOGIN LINK", url);
@@ -65,6 +71,19 @@ export const authOptions: NextAuthOptions = {
           }
         : {}),
     }),
+    GithubProvider({
+      clientId: env.GITHUB_CLIENT_ID,
+      clientSecret: env.GITHUB_CLIENT_SECRET,
+    }),
+    // CredentialProvider({
+    //   name: "credentials",
+    //   credentials: {
+    //     username: { label: "Email", type: "email", placeholder: "ndukao@example.com"},
+    //     password: { label: "Password", type: "password"},
+    //     authorize: (credentials, request) => {
+    //     }
+    //   }
+    // }),
     /**
      * ...add more providers here
      *
@@ -75,8 +94,10 @@ export const authOptions: NextAuthOptions = {
      * @see https://next-auth.js.org/providers/github
      **/
   ],
+
   pages: {
-    signIn: "/auth/signin",
+    // signIn: "/auth/signin",
+    // signIn: "/auth/cred-signin",
   }
 };
 

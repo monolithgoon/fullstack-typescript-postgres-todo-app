@@ -18,17 +18,18 @@ export function CreateTodo() {
 		
 		onMutate: async (newTodo) => {
 
-			// Cancel any outgoing re-fetches so they don't overwrite our optimistic update
+			// Cancel any outgoing/in-flight re-fetches so they don't overwrite our optimistic update
 			await trpcApiContext.todos.getAllTodos.cancel()
 
-			// Snapshot of the previous value
+			// Snapshot of the previous Todos
 			const previousTodos = trpcApiContext.todos.getAllTodos.getData()
 
 			// Optimistically update to the new value
 			trpcApiContext.todos.getAllTodos.setData(undefined, (prev) => {
 				const optimisticTodo: TodoItemType = {
 					id: 'optimistic-todo-id',
-					text: newTodo.text, // 'placeholder'
+					// text: newTodo.text, // 'placeholder'
+					text: "persisting to db...", // 'placeholder'
 					done: false
 				}
 				if (!prev) return [optimisticTodo]
@@ -100,7 +101,7 @@ export function CreateTodo() {
 				/>
 				<button
 					className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-				>Create</button>
+				>CREATE</button>
 			</form>
 		</div>
 	)

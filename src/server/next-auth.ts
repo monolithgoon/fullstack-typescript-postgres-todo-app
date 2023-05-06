@@ -6,7 +6,7 @@ import {
 } from "next-auth";
 import EmailProvider from "next-auth/providers/email";
 import GithubProvider from "next-auth/providers/github";
-import CredentialProvider from "next-auth/providers/credentials";
+// import CredentialProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { prisma } from "./db";
 import { env } from "@/env.mjs";

@@ -37,6 +37,7 @@ export function CreateTodo() {
 			})
 
 			// Clear the DOM input
+			console.log({newTodo})
 			setNewTodo({text: ""});
 
 			// Return a context object with the snapshotted value

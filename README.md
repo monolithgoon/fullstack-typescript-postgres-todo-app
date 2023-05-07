@@ -1,10 +1,14 @@
-# Fullstack Typescript, PostgreSQL Todo App
+# Full-stack Typescript, PostgreSQL Todo App
 
-> Fullstack Todo app with user authentication using email magic links, GitHub & Google OAuth, bootstrapped with the [T3 Stack](https://create.t3.gg/) template using `create-t3-app`.
+> Full-stack Todo app written in TypeScript that includes user authentication with email magic links, as well as GitHub and Google OAuth 2.0 integration. The app is bootstrapped using `create-t3-app` with the T3 Stack.
+ 
+> It uses Supabase for the cloud-hosted PostreSQL database, and Prisma for the db ORM. 
+
+> The app uses [tRPC](https://trpc.io) (TypeScript Remote Procedure Call) to implement the backend API router. tRPC is a library that enables a strongly-typed API contract using TypeScript interfaces, which helps to ensure type safety and consistency across both the backend and frontend of the application. By using rRPC to implement the API router, the app can benefit from its type safety guarantees, reducing the risk of runtime errors and improving the maintainability of the codebase. This helps ensure that the API is well-defined, consistent, and type-safe, providing a solid foundation for robustness and maintainability.
 
 ## Overview
 
-### [Deployed fullstack app](https://vercel.com/monolithgoon/fullstack-typescript-postgres-todo-app)
+### [Deployed fullstack app](https://fullstack-typescript-postgres-todo-app.vercel.app)
 
 The app ships with the following: tRPC - which stands for TypeScript Remote Procedure Call (for end-to-end API type safety), Tailwind CSS for styling, Next.js, Prisma (Node.js & Typescript ORM), and Superbase (PostgreSQL database cloud host).
 
@@ -83,15 +87,15 @@ Open the GitHub [Developer Settings](https://github.com/settings/developers)
 
 - Go to the GitHub website and sign in to your account.
 
-- Click on your profile picture in the top right corner of the screen and select "Settings" from the drop-down menu.
+- Click on your profile picture in the top right corner of the screen and select `Settings` from the drop-down menu.
 
-- Click on the "Developer settings" tab in the left sidebar and then select "OAuth Apps".
+- Click on the `Developer settings` tab in the left sidebar and then select `OAuth Apps`.
 
-- Click the "New OAuth App" button to create a new OAuth application.
+- Click the `New OAuth App` button to create a new OAuth application.
 
-- Fill in the "Application name" (eg. `fullstack-todo-app-dev`) and "Homepage URL" fields with the appropriate information for your app.
+- Fill in the `Application name` (eg. `fullstack-todo-app-dev`) and `Homepage URL` fields with the appropriate information for your app.
 
-- In the "Authorization callback URL" field, enter the URL that GitHub should redirect to after a user authorizes your app. For your local build, use `http://localhost:3000/callback` or `http://127.0.0.1:3000/callback` (assuming you are using port 3000 for your local server). For your production build, use the URL of your production server followed by "/callback".
+- In the "Authorization callback URL" field, enter the URL that GitHub should redirect to after a user authorizes your app. For your local build, use `http://localhost:3000/callback` or `http://127.0.0.1:3000/callback` (assuming you are using port 3000 for your local server). For your production build, use the URL of your production server followed by `/callback`.
 
 - Click the "Register application" button at the bottom of the page.
 

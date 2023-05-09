@@ -1,5 +1,5 @@
 import { createTRPCRouter } from "@/server/api/trpc";
-import { exampleRouter } from "@/server/api/routers/example";
+import { exampleRouter } from "@/server/api/routers/example-router";
 import { todosRouter } from "@/server/api/routers/todos-router";
 
 /**

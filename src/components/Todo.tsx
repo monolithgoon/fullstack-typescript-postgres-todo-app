@@ -1,5 +1,5 @@
 import toast from "react-hot-toast";
-import type { TodoItemType } from "@/utils/types";
+import type { TodoItemType } from "@/utils/validation";
 import { api } from "@/utils/api";
 
 export function Todo({ todo }: { todo: TodoItemType }) {

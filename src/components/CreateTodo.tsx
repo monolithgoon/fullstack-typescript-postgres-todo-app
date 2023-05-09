@@ -2,8 +2,8 @@ import { type z } from "zod"
 import React, { useState } from "react"
 import toast from "react-hot-toast";
 import { api } from "@/utils/api";
-import { TodoInputSchema } from "@/utils/types";
-import type { TodoItemType } from "@/utils/types";
+import { TodoInputSchema } from "@/utils/validation";
+import type { TodoItemType } from "@/utils/validation";
 
 export function CreateTodo() {
 

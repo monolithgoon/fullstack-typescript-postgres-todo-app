@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "@/server/api/trpc";
-import { TodoInputSchema } from "@/utils/types";
+import { TodoInputSchema } from "@/utils/validation";
 
 export const todosRouter = createTRPCRouter({
   

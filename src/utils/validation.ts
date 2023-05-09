@@ -24,3 +24,24 @@ export type TodoItemType = TodosListOutputType[number];
 export const TodoInputSchema = z.object({
   text: z.string({ required_error: "A todo must have text" }).min(2).max(50),
 });
+
+// 
+export const loginSchema = z.object({
+  email: z.string({ required_error: `A login email must is required`}).email(),
+  password: z.string({ required_error: `A login password is required`}).min(4)
+});
+
+// Define a schema for user sign up using the zod library.
+// The schema extends an existing loginSchema object by adding a new "username" field with a minimum length of 4 characters and a custom error message for when the field is required but not present.
+export const signupSchema = loginSchema.extend({ 
+  // name: z.string({ required_error: `A username is required for sign up`}).min(4),
+  username: z.string({ required_error: `A username is required for sign up`}).min(4),
+});
+
+// Define two type aliases for the loginSchema and signupSchema objects.
+// The LoginSchemaType alias represents the inferred type of the loginSchema object.
+// The SignupSchemaType alias represents the inferred type of the signupSchema object.
+// These type aliases can be used elsewhere in the code to enforce type safety and prevent type errors.
+// For example, when validating user input or defining API response types.
+export type LoginSchemaType = z.infer<typeof loginSchema>
+export type SignupSchemaType = z.infer<typeof signupSchema>;

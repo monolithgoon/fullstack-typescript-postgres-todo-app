@@ -32,10 +32,7 @@ export const signupRouter = createTRPCRouter({
         });
       }
       
-      // const hashedPassword = await hash(password);
-      // const hashedPassword: ReturnType<typeof hash> = await hash(password);
-      console.log({ password })
-      const hashedPassword = "ban guns";
+      const hashedPassword: string = await hash(password);
 
       const result = await ctx.prisma.user.create({
         data: { username, email, password: hashedPassword }

@@ -4,7 +4,9 @@ import type { AppRouter } from "../server/api/app-router";
 
 /**
  * The `inferRouterOutputs` type is used to automatically infer the type of the output of the AppRouter type.
+ * 
  * Then, a new type called `TodosListOutputType` is defined based on the selected type of the `getAllTodos` method of the `todos` endpoint of the `AppRouter`.
+ * 
  * This type is an array of todo items, with each item being of a specific type that is selected using a number index signature.
  *
  * Finally, a new type called `TodoItemType` is defined based on the type of each item in the array of todo items. This type can be used elsewhere in the code to ensure consistency and type safety when dealing with todo items.

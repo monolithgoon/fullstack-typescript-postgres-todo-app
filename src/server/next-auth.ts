@@ -7,10 +7,13 @@ import {
 import EmailProvider from "next-auth/providers/email";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
-// import CredentialProvider from "next-auth/providers/credentials";
+import CredentialProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { prisma } from "./prisma-db";
 import { env } from "@/env.mjs";
+import { verify } from "argon2";
+import { loginSchema } from "@/utils/validation";
+import { logErrorWithContext } from "@/utils/error-handler";
 
 /**
  * Module augmentation for `next-auth` types
@@ -39,6 +42,7 @@ declare module "next-auth" {
  * @see https://next-auth.js.org/configuration/options
  **/
 export const authOptions: NextAuthOptions = {
+
   callbacks: {
     session({ session, user }) {
       if (session.user) {
@@ -79,15 +83,61 @@ export const authOptions: NextAuthOptions = {
       clientId: env.GOOGLE_CLIENT_ID,
       clientSecret: env.GOOGLE_CLIENT_SECRET,
     }),
-    // CredentialProvider({
-    //   name: "credentials",
-    //   credentials: {
-    //     username: { label: "Email", type: "email", placeholder: "ndukao@example.com"},
-    //     password: { label: "Password", type: "password"},
-    //     authorize: (credentials, request) => {
-    //     }
-    //   }
-    // }),
+    CredentialProvider({
+      id: "credentials-1",
+      name: "Email & Password",
+      credentials: {
+        email: { label: "Email", type: "email", placeholder: "ndukao@example.com" },
+        password: { label: "Password", type: "password"},
+      },
+      // Using an if type guard to ensure credentials isn't null
+      // authorize: async (credentials, request) => {
+      //   try {
+      //     if (credentials !== undefined) {
+      //       const dbUser = await prisma.user.findFirst({where: { email: credentials.email }})
+      //       if (dbUser !== null) {
+      //         // Compare the passsword hashes
+      //       };
+      //     } else {
+      //       console.log(`Credentials not provided`);
+      //       return null;
+      //     }
+      //   } catch (err) {
+      //     console.log(`Hash not matched loggin in`);
+      //     return null
+      //   }
+      // },
+      authorize: async (credentials) => {
+        try {
+          const { email, password } = await loginSchema.parseAsync(credentials);
+          const dbUser = await prisma.user.findFirst({ where: { email: email }})
+          if (!dbUser) {
+            console.log(`User with email ${email} not found`);
+            return null;
+          }
+          // Compare the passsword hashes
+          console.dir({ dbUser })
+          const isValidPassword = await verify(dbUser.password, password);
+          if (!isValidPassword) {
+            console.log(`Incorrect password provided for user with email: ${email}`);
+            return null;
+          }
+          // REMOVE => CAUSING TYPE ISSUES
+          // const dbUserDetails = {
+          //   userId: dbUser.id,
+          //   username: dbUser?.username,
+          //   userPhoto: dbUser.image,
+          //   userEmail: dbUser.email,
+          //   userEmailVerifiedDate: dbUser.emailVerified,
+          // }
+          // return dbUserDetails;
+          return dbUser;
+        } catch (err: unknown) {
+          logErrorWithContext(err, "Error occured while loggin in:")
+          return null
+        }
+      },      
+    }),
     /**
      * ...add more providers here
      *

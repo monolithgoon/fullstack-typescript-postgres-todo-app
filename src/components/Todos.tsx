@@ -1,4 +1,4 @@
-import { api } from "../utils/api";
+import { api } from "../utils/trpc-api";
 import { Todo } from "./Todo";
 
 export function Todos() {

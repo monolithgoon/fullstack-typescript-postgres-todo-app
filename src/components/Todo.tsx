@@ -3,6 +3,7 @@ import type { TodoItemType } from "@/utils/validation";
 import { api } from "@/utils/trpc-api";
 
 export function Todo({ todo }: { todo: TodoItemType }) {
+  
   const { id, text, done } = todo;
 
   const trpc = api.useContext();

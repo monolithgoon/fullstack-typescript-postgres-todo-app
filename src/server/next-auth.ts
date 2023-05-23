@@ -42,7 +42,6 @@ declare module "next-auth" {
  * @see https://next-auth.js.org/configuration/options
  **/
 export const authOptions: NextAuthOptions = {
-
   callbacks: {
     session({ session, user }) {
       if (session.user) {
@@ -87,8 +86,12 @@ export const authOptions: NextAuthOptions = {
       id: "credentials-1",
       name: "Email & Password",
       credentials: {
-        email: { label: "Email", type: "email", placeholder: "ndukao@example.com" },
-        password: { label: "Password", type: "password"},
+        email: {
+          label: "Email",
+          type: "email",
+          placeholder: "ndukao@example.com",
+        },
+        password: { label: "Password", type: "password" },
       },
       // Using an if type guard to ensure credentials isn't null
       // authorize: async (credentials, request) => {
@@ -110,16 +113,30 @@ export const authOptions: NextAuthOptions = {
       authorize: async (credentials) => {
         try {
           const { email, password } = await loginSchema.parseAsync(credentials);
-          const dbUser = await prisma.user.findFirst({ where: { email: email }})
+          const dbUser = await prisma.user.findFirst({
+            where: { email: email },
+          });
           if (!dbUser) {
             console.log(`User with email ${email} not found`);
             return null;
           }
+          if (!dbUser.password) {
+            console.log(`User with email ${email} does not have a password`);
+            return null;
+          }
           // Compare the passsword hashes
-          console.dir({ dbUser })
+          console.dir({ dbUser });
+          if (!dbUser.password) {
+            console.log(
+              `User not registered with password: ${email}`
+            );
+            return null;
+          }
           const isValidPassword = await verify(dbUser.password, password);
           if (!isValidPassword) {
-            console.log(`Incorrect password provided for user with email: ${email}`);
+            console.log(
+              `Incorrect password provided for user with email: ${email}`
+            );
             return null;
           }
           // REMOVE => CAUSING TYPE ISSUES
@@ -133,10 +150,10 @@ export const authOptions: NextAuthOptions = {
           // return dbUserDetails;
           return dbUser;
         } catch (err: unknown) {
-          logErrorWithContext(err, "Error occured while loggin in:")
-          return null
+          logErrorWithContext(err, "Error occured while loggin in:");
+          return null;
         }
-      },      
+      },
     }),
     /**
      * ...add more providers here
@@ -152,6 +169,7 @@ export const authOptions: NextAuthOptions = {
   pages: {
     // signIn: "/auth/signin",
     // signIn: "/auth/cred-signin",
+    newUser: "/auth/sign-up",
   },
 };
 
